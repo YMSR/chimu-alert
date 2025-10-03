@@ -19,7 +19,7 @@ Early MVP for the obituary candidate notification app described in `AGENT.md`.
 
 ## Database overview
 - `User`: application users (NextAuth compatible) with `role` for admin gates.
-- `TrackedName`: names a user monitors, with normalized cache columns.
+- `Name`: names a user monitors, with normalized cache columns.
 - `Obituary`: ingested obituary records and related metadata.
 - `Notification`: join table between users, tracked names, and obituaries for delivery history.
 - `NotificationPreference`: per-user notification frequency (instant / daily digest).
@@ -29,5 +29,7 @@ Early MVP for the obituary candidate notification app described in `AGENT.md`.
 - Email/Password authentication uses NextAuth Credentials provider backed by Prisma.
 - `/app/login` handles both registration and login; authenticated users are redirected to `/app/dashboard`.
 - `/app/*` routes are protected by middleware and require a valid session.
+- Required env vars: `NEXTAUTH_SECRET`, `NEXTAUTH_URL`, `EMAIL_FROM`, and one of `RESEND_API_KEY` / `SENDGRID_API_KEY`.
+- `/app/names` lets users manage monitored names (CRUD + ON/OFF).
 
 Refer to `prisma/schema.prisma` and the generated migration for the canonical definition.
