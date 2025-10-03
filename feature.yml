@@ -1,0 +1,17 @@
+---
+name: Feature request
+about: Propose a feature task
+title: "feat: "
+labels: ["feature"]
+assignees: []
+---
+
+## Summary
+Describe the feature.
+
+## Acceptance Criteria
+- [ ] AC1
+- [ ] AC2
+
+## Notes
+Link to AGENT.md section if relevant.

@@ -1,0 +1,19 @@
+---
+name: Bug report
+about: Report a bug
+title: "fix: "
+labels: ["bug"]
+assignees: []
+---
+
+## Expected
+What did you expect?
+
+## Actual
+What happened?
+
+## Repro
+Steps to reproduce.
+
+## Screenshots/Logs
+If applicable.
