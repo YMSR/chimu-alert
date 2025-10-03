@@ -10,9 +10,10 @@ Early MVP for the obituary candidate notification app described in `AGENT.md`.
 ## Getting Started
 1. `npm install`
 2. Copy `.env.example` to `.env.local` and provide values (PostgreSQL connection required).
-3. Apply the initial Prisma migration: `npm run prisma:migrate`
-4. Generate the Prisma client: `npm run prisma:generate`
-5. Start the dev server with `npm run dev`
+3. Set `NEXTAUTH_SECRET` (e.g. `openssl rand -base64 32`) and other auth-related variables in `.env.local`.
+4. Apply the initial Prisma migration: `npm run prisma:migrate`
+5. Generate the Prisma client: `npm run prisma:generate`
+6. Start the dev server with `npm run dev`
 
 > Tip: when working locally, `docker compose up` with a simple Postgres image or a managed service such as Supabase/Neon works well.
 
@@ -23,5 +24,10 @@ Early MVP for the obituary candidate notification app described in `AGENT.md`.
 - `Notification`: join table between users, tracked names, and obituaries for delivery history.
 - `NotificationPreference`: per-user notification frequency (instant / daily digest).
 - NextAuth support tables: `Account`, `Session`, `VerificationToken`, `Authenticator`.
+
+## Authentication
+- Email/Password authentication uses NextAuth Credentials provider backed by Prisma.
+- `/app/login` handles both registration and login; authenticated users are redirected to `/app/dashboard`.
+- `/app/*` routes are protected by middleware and require a valid session.
 
 Refer to `prisma/schema.prisma` and the generated migration for the canonical definition.
