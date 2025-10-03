@@ -35,7 +35,7 @@ model User {
   name                    String?
   role                    Role                     @default(USER)
   notificationPreference  NotificationPreference?
-  trackedNames            TrackedName[]
+  names                   Name[]
   notifications           Notification[]
   accounts                Account[]
   sessions                Session[]
@@ -53,7 +53,7 @@ model NotificationPreference {
   updatedAt   DateTime               @updatedAt
 }
 
-model TrackedName {
+model Name {
   id                String          @id @default(cuid())
   user              User            @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            String
@@ -90,22 +90,22 @@ model Obituary {
 }
 
 model Notification {
-  id              String               @id @default(cuid())
-  user            User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId          String
-  trackedName     TrackedName          @relation(fields: [trackedNameId], references: [id], onDelete: Cascade)
-  trackedNameId   String
-  obituary        Obituary             @relation(fields: [obituaryId], references: [id], onDelete: Cascade)
-  obituaryId      String
-  channel         NotificationChannel  @default(EMAIL)
-  status          NotificationStatus   @default(PENDING)
-  sentAt          DateTime?
-  matchStrength   Float?
-  context         Json?
-  createdAt       DateTime             @default(now())
-  updatedAt       DateTime             @updatedAt
+  id            String               @id @default(cuid())
+  user          User                 @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  name          Name                 @relation(fields: [nameId], references: [id], onDelete: Cascade)
+  nameId        String
+  obituary      Obituary             @relation(fields: [obituaryId], references: [id], onDelete: Cascade)
+  obituaryId    String
+  channel       NotificationChannel  @default(EMAIL)
+  status        NotificationStatus   @default(PENDING)
+  sentAt        DateTime?
+  matchStrength Float?
+  context       Json?
+  createdAt     DateTime             @default(now())
+  updatedAt     DateTime             @updatedAt
 
-  @@unique([userId, trackedNameId, obituaryId])
+  @@unique([userId, nameId, obituaryId])
   @@index([status])
   @@index([sentAt])
 }

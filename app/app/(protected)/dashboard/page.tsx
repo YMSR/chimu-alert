@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { auth } from "@/lib/auth";
 import { SignOutButton } from "@/components/sign-out-button";
 
@@ -23,6 +25,14 @@ export default async function DashboardPage() {
           <p className="mt-2 text-sm text-slate-600">
             訃報候補の登録や通知履歴は今後ここに表示されます。
           </p>
+          <div className="mt-4">
+            <Link
+              href="/app/names"
+              className="inline-flex items-center rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-100"
+            >
+              登録名を管理する
+            </Link>
+          </div>
         </section>
       </div>
     </main>
