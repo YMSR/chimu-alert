@@ -4,6 +4,7 @@ import { compare } from "bcryptjs";
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
+import type { Adapter } from "next-auth/adapters";
 
 import { prisma } from "@/lib/prisma";
 
@@ -12,13 +13,15 @@ const credentialsSchema = z.object({
   password: z.string().min(8),
 });
 
+const adapter = PrismaAdapter(prisma) as Adapter;
+
 export const {
   auth,
   handlers,
   signIn,
   signOut,
 } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter,
   session: {
     strategy: "jwt",
   },

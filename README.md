@@ -31,5 +31,6 @@ Early MVP for the obituary candidate notification app described in `AGENT.md`.
 - `/app/*` routes are protected by middleware and require a valid session.
 - Required env vars: `NEXTAUTH_SECRET`, `NEXTAUTH_URL`, `EMAIL_FROM`, and one of `RESEND_API_KEY` / `SENDGRID_API_KEY`.
 - `/app/names` lets users manage monitored names (CRUD + ON/OFF).
+- `/admin/ingest` (admin only) uploads obituary CSVs and reports skipped rows.
 
 Refer to `prisma/schema.prisma` and the generated migration for the canonical definition.
